@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/coursemigrator/db" VERSION="20261003" COMMENT="XMLDB file for Course Migrator Receiver"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://www.moodle.org/xsd/core_xmldb_v2.0.xsd">
+
+    <TABLES>
+
+        <TABLE NAME="course_migrator_receiver" COMMENT="Course migration records received from origin Moodle instances">
+
+            <FIELDS>
+
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+
+                <FIELD NAME="source_moodle_url" TYPE="char" LENGTH="255" NOTNULL="true"/>
+                <FIELD NAME="source_course_id" TYPE="int" LENGTH="10" NOTNULL="true"/>
+                <FIELD NAME="source_course_fullname" TYPE="char" LENGTH="255" NOTNULL="true"/>
+                <FIELD NAME="source_course_shortname" TYPE="char" LENGTH="255" NOTNULL="true"/>
+
+                <FIELD NAME="destination_course_id" TYPE="int" LENGTH="10" NOTNULL="false"/>
+                <FIELD NAME="destination_course_fullname" TYPE="char" LENGTH="255" NOTNULL="false"/>
+                <FIELD NAME="destination_course_shortname" TYPE="char" LENGTH="255" NOTNULL="false"/>
+
+                <FIELD NAME="institute" TYPE="char" LENGTH="255" NOTNULL="false"/>
+                <FIELD NAME="program" TYPE="char" LENGTH="255" NOTNULL="false"/>
+                <FIELD NAME="batch" TYPE="char" LENGTH="255" NOTNULL="false"/>
+                <FIELD NAME="semester" TYPE="char" LENGTH="255" NOTNULL="false"/>
+                <FIELD NAME="specialization" TYPE="char" LENGTH="255" NOTNULL="false"/>
+
+                <FIELD NAME="mbz_filename" TYPE="char" LENGTH="255" NOTNULL="false"/>
+                
+                <FIELD NAME="source_metadata_json" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="destination_metadata_json" TYPE="text" NOTNULL="false"/>
+
+                <FIELD NAME="restore_status" TYPE="char" LENGTH="20" NOTNULL="true" DEFAULT="pending"/>
+                <FIELD NAME="restore_message" TYPE="text" NOTNULL="false"/>
+                <FIELD NAME="restore_logs" TYPE="text" NOTNULL="false"/>
+
+                <FIELD NAME="created_at" TYPE="int" LENGTH="10" NOTNULL="true"/>
+                <FIELD NAME="updated_at" TYPE="int" LENGTH="10" NOTNULL="true"/>
+
+            </FIELDS>
+
+            <KEYS>
+
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+
+            </KEYS>
+
+            <INDEXES>
+
+                <INDEX NAME="source_moodle_url" UNIQUE="false" FIELDS="source_moodle_url"/>
+                <INDEX NAME="source_course_id" UNIQUE="false" FIELDS="source_course_id"/>
+                <INDEX NAME="destination_course_id" UNIQUE="false" FIELDS="destination_course_id"/>
+                <INDEX NAME="restore_status" UNIQUE="false" FIELDS="restore_status"/>
+
+            </INDEXES>
+
+        </TABLE>
+
+    </TABLES>
+
+</XMLDB>
